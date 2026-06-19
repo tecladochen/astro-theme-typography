@@ -9,6 +9,7 @@ import {
 } from 'unocss'
 import presetTheme from 'unocss-preset-theme'
 import { themeConfig } from './src/.config'
+import { getSocialIconClass } from './src/utils/socialIcons'
 
 const { colorsDark, colorsLight, fonts } = themeConfig.appearance
 
@@ -76,7 +77,7 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   safelist: [
-    ...themeConfig.site.socialLinks.map(social => `i-mdi-${social.name}`),
+    ...themeConfig.site.socialLinks.map(social => getSocialIconClass(social.name)),
     'i-mdi-content-copy',
     'i-mdi-check',
   ],
