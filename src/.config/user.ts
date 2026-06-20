@@ -31,4 +31,7 @@ export const userConfig: Partial<UserConfig> = {
   latex: {
     katex: true,
   },
+  analytics: {
+    umamiAnalyticsId: 'cdea5eb4-dd22-42aa-926a-b3b97c891417',
+  },
 }
