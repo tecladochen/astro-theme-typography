@@ -21,9 +21,10 @@ export const userConfig: Partial<UserConfig> = {
     categoryMap: [
       { name: '随笔', path: 'essay' },
       { name: '读书', path: 'reading' },
+      { name: '英语', path: 'english' },
       { name: 'AI', path: 'ai' },
       { name: '编程', path: 'programming' },
-      { name: '折腾', path: 'tinkering' },
+      { name: '工程实践', path: 'engineering' },
       { name: '创业', path: 'startup' },
     ],
   },

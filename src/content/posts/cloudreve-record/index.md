@@ -1,12 +1,12 @@
 ---
 
-title: 'Cloudreve 个人网盘搭建记录'
+title: 'Cloudreve 私有网盘搭建记录'
 
 pubDate: 2025-08-15
 
-categories: ['折腾']
+categories: ['工程实践']
 
-draft： false
+draft: false
 
 ---
 

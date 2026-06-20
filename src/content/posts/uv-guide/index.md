@@ -4,7 +4,7 @@ title: 'uv 入门使用指南'
 
 pubDate: 2025-07-23
 
-categories: ['计算机编程']
+categories: ['编程']
 
 draft: false
 

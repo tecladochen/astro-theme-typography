@@ -4,7 +4,7 @@ title: venv 使用和原理
 
 pubDate: 2025-07-16
 
-categories: ['计算机编程']
+categories: ['编程']
 
 draft: false
 
