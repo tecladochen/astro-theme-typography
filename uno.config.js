@@ -77,7 +77,7 @@ export default defineConfig({
     ['page-wrap', 'mx-auto w-full max-w-[42rem] px-6'],
     ['post-title', 'm-0 font-header text-2xl font-bold leading-snug tracking-wide'],
     ['meta-text', 'text-sm text-muted'],
-    ['placeholder-note', 'border border-dashed border-rule rounded-md px-4 py-3 text-sm text-muted'],
+    ['placeholder-note', 'border border-dashed border-rule rounded-md px-4 py-3 text-sm text-muted flex flex-wrap items-baseline gap-x-2 gap-y-1'],
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   safelist: [

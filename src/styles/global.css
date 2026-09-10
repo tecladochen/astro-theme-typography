@@ -36,8 +36,9 @@ html.dark .astro-code span {
 }
 
 .placeholder-flag {
-  margin-left: 0.5rem;
+  margin-left: 0;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   color: theme('colors.accent');
+  white-space: nowrap;
 }
