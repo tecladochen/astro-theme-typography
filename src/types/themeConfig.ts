@@ -1,4 +1,4 @@
-import type { Link, Meta } from 'astro-seo'
+import type { SEOProps } from 'astro-seo'
 import type {
   AvailableLanguage,
   BooleanString,
@@ -26,6 +26,10 @@ export interface ThemeConfig {
 
 export type UserConfig = DeepPartial<ThemeConfig>
 
+type SeoExtend = NonNullable<SEOProps['extend']>
+type SeoLink = NonNullable<SeoExtend['link']>[number]
+type SeoMeta = NonNullable<SeoExtend['meta']>[number]
+
 export interface ConfigSite {
   title: string
   subtitle: string
@@ -49,8 +53,8 @@ export interface ConfigAppearance {
 
 export interface ConfigSEO {
   twitter: string
-  meta: Partial<Meta>[]
-  link: Partial<Link>[]
+  meta: SeoMeta[]
+  link: SeoLink[]
 }
 
 export interface ConfigComment {
@@ -78,14 +82,14 @@ export interface ConfigLaTeX {
 interface Colors {
   primary: string
   background: string
+  muted: string
+  accent: string
+  rule: string
 }
 
 interface Fonts {
   header: string
   ui: string
-  // TODO: 未实现
-  _article?: string
-  _code?: string
 }
 
 interface Twikoo {

@@ -15,7 +15,25 @@ const { colorsDark, colorsLight, fonts } = themeConfig.appearance
 
 const cssExtend = {
   ':root': {
-    '--prose-borders': '#eee',
+    '--prose-borders': 'var(--un-preset-theme-colors-rule, #e2d6c4)',
+  },
+
+  'h1,h2,h3,h4': {
+    'font-family': fonts.header,
+    'letter-spacing': '0.02em',
+    'font-weight': '700',
+  },
+
+  'a': {
+    'color': 'inherit',
+    'text-decoration-color': 'color-mix(in srgb, var(--un-preset-theme-colors-accent, #9c3b2d) 55%, transparent)',
+    'text-underline-offset': '0.22em',
+  },
+
+  'blockquote': {
+    'border-left-color': 'var(--un-preset-theme-colors-accent, #9c3b2d)',
+    'font-style': 'normal',
+    'color': 'var(--un-preset-theme-colors-muted, #7a7268)',
   },
 
   'code::before,code::after': {
@@ -25,11 +43,10 @@ const cssExtend = {
   ':where(:not(pre):not(a) > code)': {
     'white-space': 'normal',
     'word-wrap': 'break-word',
-    'padding': '2px 4px',
-    'color': '#c7254e',
-    'font-size': '90%',
-    'background-color': '#f9f2f4',
-    'border-radius': '4px',
+    'padding': '0.1em 0.35em',
+    'font-size': '0.9em',
+    'background-color': 'color-mix(in srgb, var(--un-preset-theme-colors-rule, #e2d6c4) 70%, transparent)',
+    'border-radius': '0.25rem',
   },
 
   'li': {
@@ -39,41 +56,28 @@ const cssExtend = {
 }
 
 export default defineConfig({
-  rules: [
-    [
-      /^row-(\d+)-(\d)$/,
-      ([, start, end]) => ({ 'grid-row': `${start}/${end}` }),
-    ],
-    [
-      /^col-(\d+)-(\d)$/,
-      ([, start, end]) => ({ 'grid-column': `${start}/${end}` }),
-    ],
-    [
-      /^scrollbar-hide$/,
-      ([_]) => `.scrollbar-hide { scrollbar-width:none;-ms-overflow-style: none; }
-      .scrollbar-hide::-webkit-scrollbar {display:none;}`,
-    ],
-  ],
   presets: [
     presetWind3(),
     presetTypography({ cssExtend }),
     presetAttributify(),
-    presetIcons({ scale: 1.2, warn: true }),
-    presetTheme ({
+    presetIcons({ scale: 1.15, warn: true }),
+    presetTheme({
       theme: {
         dark: {
-          colors: { ...colorsDark, shadow: '#FFFFFF0A' },
-          // TODO 需要配置代码块颜色
+          colors: { ...colorsDark, shadow: '#00000000' },
         },
       },
     }),
   ],
   theme: {
-    colors: { ...colorsLight, shadow: '#0000000A' },
+    colors: { ...colorsLight, shadow: '#00000000' },
     fontFamily: fonts,
   },
   shortcuts: [
-    ['post-title', 'text-5 font-bold lh-7.5 m-0'],
+    ['page-wrap', 'mx-auto w-full max-w-[42rem] px-6'],
+    ['post-title', 'm-0 font-header text-2xl font-bold leading-snug tracking-wide'],
+    ['meta-text', 'text-sm text-muted'],
+    ['placeholder-note', 'border border-dashed border-rule rounded-md px-4 py-3 text-sm text-muted'],
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   safelist: [

@@ -2,21 +2,16 @@
 import { themeConfig } from '~/.config'
 
 const year = new Date().getFullYear()
-
 const { website, author, footer } = themeConfig.site
 
 function parseFooter(str: string) {
-  str = str.replace(/%author/g, author)
-  str = str.replace(/%website/g, website)
-  str = str.replace(/%year/g, year.toString())
   return str
+    .replace(/%author/g, author)
+    .replace(/%website/g, website)
+    .replace(/%year/g, year.toString())
 }
 ---
 
-{footer.length && footer.map((str) => <p set:html={parseFooter(str)} />)}
-
-<style>
-  p {
-    --at-apply: 'font-bold text-3';
-  }
-</style>
+<div class="flex flex-col gap-1 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+  {footer.map((str) => <p class="m-0" set:html={parseFooter(str)} />)}
+</div>

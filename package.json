@@ -1,12 +1,12 @@
 {
-  "name": "astro-theme-typography",
+  "name": "gudu-zhongjie",
   "type": "module",
   "version": "0.1.0",
   "packageManager": "pnpm@10.13.1",
-  "description": "A typography theme for Astro, inspired by the design of the original Typography theme.",
-  "author": "Moeyua <mail@moeyua.com> (https://github.com/moeyua/)",
+  "description": "孤独终洁 — Teclado 的个人博客",
+  "author": "Teclado <tecladochen@qq.com> (https://blog.teclado.cn)",
   "license": "MIT",
-  "repository": "https://github.com/moeyua/astro-theme-typography",
+  "repository": "https://github.com/tecladochen/astro-theme-typography",
   "scripts": {
     "dev": "astro check && astro dev",
     "build": "astro check && astro build",
@@ -14,9 +14,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "theme:release": "tsx scripts/release-theme.ts",
-    "theme:create": "tsx scripts/create-post.ts",
-    "theme:update": "tsx scripts/update-theme.ts"
+    "post:create": "tsx scripts/create-post.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -24,7 +22,6 @@
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
     "@github/clipboard-copy-element": "^1.3.0",
-    "@swup/astro": "^1.6.0",
     "astro": "^5.11.1",
     "astro-robots-txt": "^1.0.0",
     "astro-seo": "^0.8.4",
@@ -60,8 +57,7 @@
     "tsx": "^4.20.3",
     "typescript": "~5.8.3",
     "unocss": "^66.3.3",
-    "unocss-preset-theme": "^0.14.1",
-    "vite-plugin-devtools-json": "^0.3.0"
+    "unocss-preset-theme": "^0.14.1"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

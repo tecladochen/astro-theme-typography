@@ -4,7 +4,6 @@ import type { Post } from '~/types'
 import { formatDate, getPosts } from '~/utils'
 
 const posts = await getPosts(true)
-
 const yearMap = getYearMap(posts)
 
 interface ListItem {
@@ -17,9 +16,9 @@ function getYearMap(posts: Post[]) {
   const result = new Map<number, ListItem[]>()
   for (const post of posts) {
     const year = (post.data.pubDate ?? new Date()).getFullYear()
-    const posts = result.get(year) ?? []
-    posts.push(getListItem(post))
-    result.set(year, posts)
+    const items = result.get(year) ?? []
+    items.push(getListItem(post))
+    result.set(year, items)
   }
   return Array.from(result.entries())
 }
@@ -34,18 +33,18 @@ function getListItem(post: Post): ListItem {
 ---
 
 <LayoutDefault>
-  <div flex="~ col gap-4">
+  <div class="flex flex-col gap-10">
     {
-      yearMap.map(([year, posts]) => (
+      yearMap.map(([year, items]) => (
         <section>
-          <h2 class="post-title">{year}</h2>
-          <ul class="pl-6" flex="~ col gap-4">
-            {posts.map(({ title, href, date }) => (
-              <li>
-                <h3 class="post-title">
-                  <a href={href}>{title}</a>
-                </h3>
-                <time>{date}</time>
+          <h2 class="post-title mb-5">{year}</h2>
+          <ul class="m-0 flex list-none flex-col gap-4 p-0">
+            {items.map(({ title, href, date }) => (
+              <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <a class="not-underline-hover font-header text-lg font-bold" href={href}>
+                  {title}
+                </a>
+                <time class="meta-text shrink-0">{date}</time>
               </li>
             ))}
           </ul>

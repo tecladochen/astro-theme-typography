@@ -9,15 +9,14 @@ interface Props {
 
 const { post } = Astro.props
 const { translate: t } = Astro.locals
-
 const categoryList = post.data.categories ?? []
 ---
 
-<header flex="~ col gap-2">
+<header class="mb-8 flex flex-col gap-2 not-prose">
   <h1 class="post-title">
-    <a class="not-prose" href={`/posts/${post.id}/`}>{post.data.title}</a>
+    <a class="not-underline-hover" href={`/posts/${post.id}/`}>{post.data.title}</a>
   </h1>
-  <div class="text-3.5">
+  <div class="meta-text flex flex-wrap items-center gap-x-3 gap-y-1">
     <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>
     <time>{formatDate(post.data.modDate ?? post.data.pubDate)}</time>
     {categoryList.map((category) => <PostCategory category={category} />)}
