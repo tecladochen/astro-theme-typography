@@ -1,9 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import { formatDate } from '~/utils'
 
-const { translate: t } = Astro.locals
 const aboutPost = await getEntry('spec', 'about')
 if (!aboutPost) {
   throw new Error('No about post found')
@@ -12,16 +10,15 @@ const { Content } = await render(aboutPost)
 ---
 
 <LayoutDefault>
-  <header flex="~ col gap-2">
-    <h1 class="post-title">
-      <a class="not-prose">{aboutPost.data.title}</a>
-    </h1>
-    <div class="text-3.5">
-      <span>{t('posted_at')}</span>
-      <time>{formatDate(aboutPost.data.pubDate)}</time>
-    </div>
+  <header class="mb-8 flex flex-col gap-2">
+    <h1 class="post-title">关于</h1>
+    <p class="meta-text m-0">Teclado · INFJ · 想把走过的路慢慢写下来</p>
   </header>
   <article class="prose">
     <Content />
   </article>
+  <aside class="placeholder-note mt-12">
+    关于页还想补一张照片，以及现在手头正在做的事。社交入口在右上角，暂时够用。
+    <span class="placeholder-flag">待你改</span>
+  </aside>
 </LayoutDefault>

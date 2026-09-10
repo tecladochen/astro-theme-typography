@@ -1,87 +1,61 @@
 import type { ThemeConfig } from '~/types'
 
-// This is the default configuration for the template, please do not modify it directly.
-// You can override this configuration in the `.config/user.ts` file.
-
 export const defaultConfig: ThemeConfig = {
   site: {
-    title: '活版印字',
-    subtitle: 'Typography',
-    author: 'Moeyua',
-    description: 'Rediscory the beauty of typography',
-    website: 'https://astro-theme-typography.vercel.app/',
-    pageSize: 5,
+    title: '孤独终洁',
+    subtitle: 'No More Solitude',
+    author: 'Teclado',
+    description: '写文字、记生活，在网络的角落里留下成长与经历的痕迹——不再只是孤独，而是与自己对话。',
+    website: 'https://blog.teclado.cn',
+    pageSize: 8,
     socialLinks: [
-      {
-        name: 'github',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
-      {
-        name: 'rss',
-        href: '/atom.xml',
-      },
-      {
-        name: 'twitter',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
-      {
-        name: 'mastodon',
-        href: 'https://github.com/moeyua/astro-theme-typography',
-      },
+      { name: 'rss', href: '/atom.xml' },
+      { name: 'email', href: 'mailto:tecladochen@qq.com' },
+      { name: 'bilibili', href: 'https://space.bilibili.com/297265384' },
+      { name: 'github', href: 'https://github.com/tecladochen' },
     ],
     navLinks: [
-      {
-        name: 'Posts',
-        href: '/',
-      },
-      {
-        name: 'Archive',
-        href: '/archive',
-      },
-      {
-        name: 'Categories',
-        href: '/categories',
-      },
-      {
-        name: 'About',
-        href: '/about',
-      },
+      { name: 'Posts', href: '/' },
+      { name: 'Archive', href: '/archive' },
+      { name: 'About', href: '/about' },
     ],
-    categoryMap: [{ name: '胡适', path: 'hu-shi' }],
+    categoryMap: [{ name: '读书', path: 'reading' }],
     footer: [
       '© %year <a target="_blank" href="%website">%author</a>',
-      'Theme <a target="_blank" href="https://github.com/Moeyua/astro-theme-typography">Typography</a> by <a target="_blank" href="https://moeyua.com">Moeyua</a>',
-      'Proudly published with <a target="_blank" href="https://astro.build/">Astro</a>',
+      '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备2023044092号-3</a>',
     ],
   },
   appearance: {
     theme: 'system',
     locale: 'zh-cn',
     colorsLight: {
-      primary: '#2e405b',
-      background: '#ffffff',
+      primary: '#2b261f',
+      background: '#f4efe6',
+      muted: '#7a7268',
+      accent: '#9c3b2d',
+      rule: '#e2d6c4',
     },
     colorsDark: {
-      primary: '#FFFFFF',
-      background: '#232222',
+      primary: '#efe8dc',
+      background: '#1c1916',
+      muted: '#a89f93',
+      accent: '#d4786a',
+      rule: '#3a342c',
     },
     fonts: {
-      header:
-        '"HiraMinProN-W6","Source Han Serif CN","Source Han Serif SC","Source Han Serif TC",serif',
-      ui: '"Source Sans Pro","Roboto","Helvetica","Helvetica Neue","Source Han Sans SC","Source Han Sans TC","PingFang SC","PingFang HK","PingFang TC",sans-serif',
+      header: '"Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", serif',
+      ui: '"PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif',
     },
   },
   seo: {
-    twitter: '@moeyua13',
+    twitter: '',
     meta: [],
     link: [],
   },
   rss: {
     fullText: true,
   },
-  comment: {
-    // disqus: { shortname: "typography-astro" },
-  },
+  comment: {},
   analytics: {
     googleAnalyticsId: '',
     umamiAnalyticsId: '',

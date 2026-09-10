@@ -1,12 +1,13 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
+import { getEntry } from 'astro:content'
 import { themeConfig } from '~/.config'
 import Pagination from '~/components/Pagination.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import LayoutPost from '~/layouts/LayoutPost.astro'
-import { getPostDescription, getPosts } from '~/utils'
+import { getPostDescription, getPosts, formatDate } from '~/utils'
 
 const { translate: t } = Astro.locals
+const about = await getEntry('spec', 'about')
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getPosts()
@@ -21,26 +22,66 @@ export const getStaticPaths = (async ({ paginate }) => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const { page } = Astro.props
+const isFirstPage = page.currentPage === 1
 ---
 
 <LayoutDefault>
-  <section contain-layout flex="~ col gap-7.5">
+  {
+    isFirstPage && (
+      <section class="mb-14 flex flex-col gap-4">
+        <p class="m-0 text-[1.05rem] leading-8 text-primary/90">{themeConfig.site.description}</p>
+        {about && (
+          <p class="m-0 text-sm leading-7 text-muted">
+            我是 {themeConfig.site.author}，00 后，INFJ，在创业团队里做全栈，也在学着少想一点、多做一点。
+            <a href="/about">关于这个人</a>
+          </p>
+        )}
+      </section>
+    )
+  }
+
+  <section class="flex flex-col gap-10">
     {
       page.data.map((post) => (
-        <LayoutPost post={post}>
-          <p class="line-clamp-4">{getPostDescription(post)}</p>
-        </LayoutPost>
+        <article class="flex flex-col gap-3">
+          <h2 class="post-title">
+            <a class="not-underline-hover" href={`/posts/${post.id}/`}>
+              {post.data.title}
+            </a>
+          </h2>
+          <p class="meta-text m-0">
+            <time>{formatDate(post.data.pubDate)}</time>
+            {post.data.categories?.map((category) => (
+              <span> · {category}</span>
+            ))}
+          </p>
+          <p class="m-0 line-clamp-3 leading-7 text-primary/80">{getPostDescription(post)}</p>
+        </article>
       ))
     }
   </section>
-  <Pagination
-    showLeft={Boolean(page.url.prev)}
-    leftTitle={t('prev')}
-    leftUrl={page.url.prev}
-    showRight={Boolean(page.url.next)}
-    rightTitle={t('next')}
-    rightUrl={page.url.next}
-    currentPage={page.currentPage}
-    totalPage={page.lastPage}
-  />
+
+  {
+    isFirstPage && (
+      <aside class="placeholder-note mt-14">
+        还想写乐器、游戏、英语，以及创业里真正想通的事。下一篇还没定。
+        <span class="placeholder-flag">待你改</span>
+      </aside>
+    )
+  }
+
+  {
+    page.lastPage > 1 && (
+      <Pagination
+        showLeft={Boolean(page.url.prev)}
+        leftTitle={t('prev')}
+        leftUrl={page.url.prev}
+        showRight={Boolean(page.url.next)}
+        rightTitle={t('next')}
+        rightUrl={page.url.next}
+        currentPage={page.currentPage}
+        totalPage={page.lastPage}
+      />
+    )
+  }
 </LayoutDefault>

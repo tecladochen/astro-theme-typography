@@ -1,12 +1,12 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
+import { render } from 'astro:content'
 import Comments from '~/components/Comments.astro'
 import Pagination from '~/components/Pagination.astro'
 import SiteSeo from '~/components/SiteSeo.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import LayoutPost from '~/layouts/LayoutPost.astro'
 import { getPosts } from '~/utils'
-import { render } from 'astro:content'
 
 export const getStaticPaths = (async () => {
   const posts = await getPosts()
@@ -20,7 +20,6 @@ export const getStaticPaths = (async () => {
   })
 }) satisfies GetStaticPaths
 
-// type Params = InferGetStaticParamsType<typeof getStaticPaths>
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const { entry, prev, next } = Astro.props
@@ -41,14 +40,13 @@ function getUrl(id: string) {
 
   <Pagination
     showLeft={Boolean(prev)}
-    leftTitle={`${t('prev_post')}: ${prev?.data.title}`}
-    leftUrl={getUrl(prev?.id)}
+    leftTitle={prev ? `${t('prev_post')}：${prev.data.title}` : undefined}
+    leftUrl={prev ? getUrl(prev.id) : undefined}
     showRight={Boolean(next)}
-    rightTitle={`${t('next_post')}: ${next?.data.title}`}
-    rightUrl={getUrl(next?.id)}
+    rightTitle={next ? `${t('next_post')}：${next.data.title}` : undefined}
+    rightUrl={next ? getUrl(next.id) : undefined}
     showPageCount={false}
   />
-  <!-- BUG 这里使用 client:visible 会导致构建失败。ref: https://github.com/withastro/astro/issues/7329 -->
   <Comments post={entry} />
 </LayoutDefault>
 
@@ -65,19 +63,16 @@ function getUrl(id: string) {
   })
 
   const codeBlocks = Array.from(document.querySelectorAll('pre'))
-  const icon = "<div class='i-mdi-content-copy icon text-white'></div>"
+  const icon = '<div class="i-mdi-content-copy icon text-white"></div>'
   for (const codeBlock of codeBlocks) {
     const wrapper = document.createElement('div')
     wrapper.className = 'code-container'
-
     const copyButton = document.createElement('clipboard-copy')
     const code = codeBlock.querySelector('code')
     copyButton.value = code?.textContent ?? ''
     copyButton.className = 'clipboard-copy'
     copyButton.innerHTML = icon
-
     codeBlock.appendChild(copyButton)
-
     codeBlock.parentNode?.insertBefore(wrapper, codeBlock)
     wrapper.appendChild(codeBlock)
   }
@@ -98,8 +93,7 @@ function getUrl(id: string) {
     align-items: center;
     border-radius: 0.25rem;
   }
-
   .clipboard-copy:hover {
-    background-color: #30363d;
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
   }
 </style>

@@ -2,7 +2,7 @@
 title: 读《一句顶一万句》上篇《出延津记》
 pubDate: 2025-06-30
 categories: ['读书']
-description: ''
+description: '上周花了一些时间读刘震云的《一句顶一万句》，只来得及读完上篇《出延津记》。'
 draft: false
 ---
 
